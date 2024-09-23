@@ -30,4 +30,10 @@ public class HelloWorld {
         String line = String.format("a = %d, b = %d, c = %d", a, b, c);
         System.out.println(line);
     }
+
+    public void test(int a, int b) {
+        int c = a + b;
+        int d = c + 0;
+        System.out.println(d);
+    }
 }

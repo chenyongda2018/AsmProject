@@ -5,6 +5,7 @@ import com.android.build.api.instrumentation.ClassContext
 import com.android.build.api.instrumentation.ClassData
 import com.android.build.api.instrumentation.InstrumentationParameters
 import com.cyd.plugin.visitor.MethodFindRefVisitor
+import com.cyd.plugin.visitor.MethodRemoveVisitor
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.Opcodes
 
@@ -14,7 +15,8 @@ abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.N
         classContext: ClassContext,
         nextClassVisitor: ClassVisitor
     ): ClassVisitor {
-        return MethodFindRefVisitor(Opcodes.ASM5,nextClassVisitor,"android/util/Log","i","(Ljava/lang/String;Ljava/lang/String;)I")
+//        return MethodFindRefVisitor(Opcodes.ASM5,nextClassVisitor,"android/util/Log","i","(Ljava/lang/String;Ljava/lang/String;)I")
+        return MethodRemoveVisitor(Opcodes.ASM5,nextClassVisitor)
     }
 
     override fun isInstrumentable(classData: ClassData): Boolean {

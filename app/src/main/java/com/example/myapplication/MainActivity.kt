@@ -26,4 +26,10 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         Log.i(TAG,"onResume---")
     }
+
+    fun test(a: Int, b: Int) {
+        val c = a + b
+        val d = c + 0
+        println(d)
+    }
 }

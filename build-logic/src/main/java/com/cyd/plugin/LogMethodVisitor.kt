@@ -4,6 +4,9 @@ import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.commons.AdviceAdapter
 
+/**
+ * 在方法中添加代码
+ */
 class LogMethodVisitor(
     private val className: String,
     nextMethodVisitor: MethodVisitor,
