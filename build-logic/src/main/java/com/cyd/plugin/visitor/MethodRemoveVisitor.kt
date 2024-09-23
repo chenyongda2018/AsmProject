@@ -21,11 +21,11 @@ class MethodRemoveVisitor
         exceptions: Array<out String>?
     ): MethodVisitor {
         var mv = cv.visitMethod(access, name, descriptor, signature, exceptions)
-        if (mv != null && "<init>" !== name && "<clinit>" !== name) {
+        if (mv != null && !"<init>".equals(name) && !"<clinit>".equals(name)) {
             val isAbstract = (access and Opcodes.ACC_ABSTRACT) != 0
             val isNative = (access and Opcodes.ACC_NATIVE) != 0
             if (!isAbstract && !isNative) {
-                mv = MethodRemoveAddZeroAdapter(api,mv)
+                mv = MethodRemoveAddZeroAdapter(api, mv)
             }
         }
         return mv
@@ -56,6 +56,7 @@ class MethodRemoveAddZeroAdapter(api: Int, methodVisitor: MethodVisitor) :
                 }
             }
         }
+        super.visitInsn(opcode)
     }
 
     override fun visitInsn() {

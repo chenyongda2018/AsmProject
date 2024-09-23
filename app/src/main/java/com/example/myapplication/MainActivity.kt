@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.i(TAG,"onResume---")
+        test(1,1)
     }
 
     fun test(a: Int, b: Int) {
