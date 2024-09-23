@@ -11,6 +11,7 @@ class LogMethodVisitor(
     name: String?,
     descriptor: String?
 ):AdviceAdapter(Opcodes.ASM5,nextMethodVisitor,access,name,descriptor) {
+
     override fun onMethodEnter() {
         mv.visitLdcInsn("LogMethodVisitor")
         mv.visitLdcInsn("enter: $className.$name")

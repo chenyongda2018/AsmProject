@@ -4,8 +4,8 @@ import com.android.build.api.instrumentation.AsmClassVisitorFactory
 import com.android.build.api.instrumentation.ClassContext
 import com.android.build.api.instrumentation.ClassData
 import com.android.build.api.instrumentation.InstrumentationParameters
+import com.cyd.plugin.visitor.MethodFindRefVisitor
 import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 
 abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.None> {
@@ -14,20 +14,7 @@ abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.N
         classContext: ClassContext,
         nextClassVisitor: ClassVisitor
     ): ClassVisitor {
-        return object : ClassVisitor(Opcodes.ASM5, nextClassVisitor) {
-            val className = classContext.currentClassData.className
-
-            override fun visitMethod(
-                access: Int,
-                name: String?,
-                descriptor: String?,
-                signature: String?,
-                exceptions: Array<out String>?
-            ): MethodVisitor {
-                val oldVisitor = super.visitMethod(access, name, descriptor, signature, exceptions)
-                return LogMethodVisitor(className, oldVisitor, access, name, descriptor)
-            }
-        }
+        return MethodFindRefVisitor(Opcodes.ASM5,nextClassVisitor,"android/util/Log","i","(Ljava/lang/String;Ljava/lang/String;)I")
     }
 
     override fun isInstrumentable(classData: ClassData): Boolean {
