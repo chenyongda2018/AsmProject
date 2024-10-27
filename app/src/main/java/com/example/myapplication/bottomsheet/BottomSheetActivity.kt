@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.bottomsheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.myapplication.R
 
 
 class BottomSheetActivity : AppCompatActivity() {
@@ -20,20 +20,21 @@ class BottomSheetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bottom_sheet)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val data = mutableListOf<String>()
         repeat(20) {
             data.add("内容")
         }
-        val adapter = MyAdapter(data)
+        val adapter = BottomSheetTestAdapter(data)
 
         recyclerView.adapter = adapter
     }
 
 }
 
-class MyAdapter(private var data: List<String>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class BottomSheetTestAdapter(private var data: List<String>) :
+    RecyclerView.Adapter<BottomSheetTestAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -45,7 +46,7 @@ class MyAdapter(private var data: List<String>) : RecyclerView.Adapter<MyAdapter
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.getContext())
             .inflate(R.layout.list_item, parent, false)
         return ViewHolder(view)
@@ -55,7 +56,7 @@ class MyAdapter(private var data: List<String>) : RecyclerView.Adapter<MyAdapter
         return data.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.textView?.text = data[p1]
+    override fun onBindViewHolder(vh: ViewHolder, position: Int) {
+        vh.textView?.text = data[position]
     }
 }
