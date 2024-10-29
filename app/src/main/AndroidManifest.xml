@@ -15,6 +15,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".service.IntentServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PluginActivity"
+            android:exported="false" />
+        <activity
             android:name=".bottomsheet.BottomSheetActivity"
             android:exported="false" />
         <activity
@@ -26,6 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.MyIntentService"/>
     </application>
 
 </manifest>
