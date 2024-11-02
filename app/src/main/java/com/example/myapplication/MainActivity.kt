@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.bottomsheet.BottomSheetActivity
 import com.example.myapplication.extension.buildLayoutManager
 import com.example.myapplication.service.IntentServiceActivity
+import com.example.myapplication.service.workmanager.WorkManagerActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val list = listOf<MenuItemData>(
             MenuItemData("BottomSheet", Intent(this, BottomSheetActivity::class.java)),
             MenuItemData("IntentService", Intent(this, IntentServiceActivity::class.java)),
+            MenuItemData("WorkManager", Intent(this, WorkManagerActivity::class.java)),
         )
 
         val menuAdapter = FeatureMenuAdapter(list)

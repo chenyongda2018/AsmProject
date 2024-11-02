@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".service.workmanager.WorkManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".service.IntentServiceActivity"
             android:exported="false" />
         <activity
@@ -33,7 +36,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyIntentService"/>
+        <service android:name=".service.MyIntentService" />
     </application>
 
 </manifest>
