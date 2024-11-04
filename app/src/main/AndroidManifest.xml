@@ -18,6 +18,9 @@
             android:name=".service.workmanager.WorkManagerActivity"
             android:exported="false" />
         <activity
+            android:name=".bottomsheetv2.BottomV2Activity"
+            android:exported="false" />
+        <activity
             android:name=".service.IntentServiceActivity"
             android:exported="false" />
         <activity
