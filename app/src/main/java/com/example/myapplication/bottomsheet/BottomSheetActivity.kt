@@ -26,15 +26,15 @@ class BottomSheetActivity : AppCompatActivity() {
         repeat(20) {
             data.add("内容")
         }
-        val adapter = BottomSheetTestAdapter(data)
+        val adapter = SimpleStringListAdapter(data)
 
         recyclerView.adapter = adapter
     }
 
 }
 
-class BottomSheetTestAdapter(private var data: List<String>) :
-    RecyclerView.Adapter<BottomSheetTestAdapter.ViewHolder>() {
+class SimpleStringListAdapter(private var data: List<String>) :
+    RecyclerView.Adapter<SimpleStringListAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

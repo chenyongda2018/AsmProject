@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressViewH">
+        <attr name="h_bg_radius" format="dimension" />
+        <attr name="h_pro_radius" format="dimension" />
+        <attr name="h_bg_width" format="dimension" />
+        <attr name="h_bg_color" format="color" />
+        <attr name="h_pro_width" format="dimension" />
+        <attr name="h_pro_color" format="color" />
+        <attr name="h_text_padding" format="dimension" />
+        <attr name="h_max_step" format="integer" />
+        <attr name="h_text_size" format="dimension" />
+        <attr name="h_text_color" format="color" />
+        <!--总进度-->
+        <attr name="h_pro_step" format="integer" />
+    </declare-styleable>
+</resources>

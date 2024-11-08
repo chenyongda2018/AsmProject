@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.behavior_scrollview.view.BahaviorLayoutActivity
 import com.example.myapplication.bottomsheet.BottomSheetActivity
 import com.example.myapplication.extension.buildLayoutManager
 import com.example.myapplication.service.IntentServiceActivity
 import com.example.myapplication.service.workmanager.WorkManagerActivity
+import com.example.myapplication.view.StepsViewActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             MenuItemData("BottomSheet", Intent(this, BottomSheetActivity::class.java)),
             MenuItemData("IntentService", Intent(this, IntentServiceActivity::class.java)),
             MenuItemData("WorkManager", Intent(this, WorkManagerActivity::class.java)),
+            MenuItemData("BottomSheet & RV", Intent(this, BahaviorLayoutActivity::class.java)),
+            MenuItemData("Step view", Intent(this, StepsViewActivity::class.java)),
         )
 
         val menuAdapter = FeatureMenuAdapter(list)
