@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="#294B7A"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.StepsViewActivity">
@@ -45,5 +44,20 @@
         app:layout_constraintTop_toBottomOf="@id/progress"
         android:layout_marginTop="50dp"
         android:text="减少"/>
+
+    <TextView
+        android:id="@+id/roundBtn"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:text="今天"
+        android:textColor="#9CD7FF"
+        android:gravity="center"
+        android:textSize="10dp"
+        app:layout_constraintTop_toBottomOf="@id/plusBtn"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
