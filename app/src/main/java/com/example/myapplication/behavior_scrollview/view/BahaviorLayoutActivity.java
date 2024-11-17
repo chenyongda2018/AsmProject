@@ -1,7 +1,9 @@
 package com.example.myapplication.behavior_scrollview.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -37,10 +39,10 @@ public class BahaviorLayoutActivity extends AppCompatActivity {
             return insets;
         });
 
-        RvEx.buildLayoutManager(binding.rvLinkageTop,this);
+        RvEx.buildLayoutManager(binding.rvLinkageTop, this);
         RvEx.buildMockAdapter(binding.rvLinkageTop);
 
-        RvEx.buildLayoutManager(binding.rvLinkageBottom,this);
+        RvEx.buildLayoutManager(binding.rvLinkageBottom, this);
         RvEx.buildMockAdapter(binding.rvLinkageBottom);
 
         binding.linkageScroll.setTopScrollTarget(new Function0<View>() {
@@ -61,35 +63,63 @@ public class BahaviorLayoutActivity extends AppCompatActivity {
             }
         });
 
-        binding.bottomSheet.setup(BottomSheetLayout.POSITION_MID, floatingHeight);
+
         updateFloatState();
+        binding.bottomSheet.setTopScrollTarget(new Function0<BehavioralScrollView>() {
+            @Override
+            public BehavioralScrollView invoke() {
+                return binding.linkageScroll;
+            }
+        });
+        binding.rvLinkageTop.post(() -> {
+            int rvHeight = binding.rvLinkageTop.getHeight() + binding.layoutBottom.getHeight();
+            if (rvHeight < binding.getRoot().getHeight() - floatingHeight) {
+                floatingHeight = binding.getRoot().getHeight() - binding.rvLinkageTop.getHeight();
+            }
+            binding.bottomSheet.setup(BottomSheetLayout.POSITION_MIN, floatingHeight);
+            ViewGroup.LayoutParams llp  = binding.layoutBottom.getLayoutParams();
+            llp.height = floatingHeight;
+            binding.layoutBottom.setLayoutParams(llp);
+        });
+
+//        binding.linkageScroll.setBottomScrollTarget(new Function0<BehavioralScrollView>() {
+//            @Override
+//            public BehavioralScrollView invoke() {
+//                return binding.bottomSheet;
+//            }
+//        });
     }
 
 
-    private final int floatingHeight = NumEx.getDp(100);
+    private int floatingHeight = NumEx.getDp(100);
 
 
     private void updateFloatState() {
-        if(binding.bottomSheet.indexOfChild(binding.bottomScrollView) >= 0) {
+        if (binding.bottomSheet.indexOfChild(binding.bottomScrollView) >= 0) {
             if (binding.linkageScroll.getScrollY() >= floatingHeight) {
-                binding.bottomSheet.setVisibility(View.GONE);
-                binding.bottomSheet.removeView(binding.bottomScrollView);
-                if (binding.layoutBottom.indexOfChild(binding.bottomScrollView) < 0) {
-                    binding.layoutBottom.addView(binding.bottomScrollView);
-                }
-                binding.linkageScroll.setBottomScrollTarget(new Function0<View>() {
-                    @Override
-                    public View invoke() {
-                        return binding.bottomScrollView;
-                    }
-                });
+                Log.d("cyyd", "滑到了");
+//                binding.bottomSheet.setNeedHandleTouchEvent(true);
+//                binding.bottomSheet.setVisibility(View.GONE);
+//                binding.bottomSheet.removeView(binding.bottomScrollView);
+//                if (binding.layoutBottom.indexOfChild(binding.bottomScrollView) < 0) {
+//                    binding.layoutBottom.addView(binding.bottomScrollView);
+//                }
+//                binding.linkageScroll.setBottomScrollTarget(new Function0<View>() {
+//                    @Override
+//                    public View invoke() {
+//                        return binding.bottomScrollView;
+//                    }
+//                });
             }
+//            else {
+//                binding.bottomSheet.setNeedHandleTouchEvent(false);
+//            }
         } else {
             if (binding.linkageScroll.getScrollY() < floatingHeight) {
                 binding.linkageScroll.setBottomScrollTarget(null);
-                if (binding.layoutBottom.indexOfChild(binding.bottomScrollView) >= 0) {
-                    binding.layoutBottom.removeView(binding.bottomScrollView);
-                }
+//                if (binding.layoutBottom.indexOfChild(binding.bottomScrollView) >= 0) {
+//                    binding.layoutBottom.removeView(binding.bottomScrollView);
+//                }
                 if (binding.bottomSheet.indexOfChild(binding.bottomScrollView) < 0) {
 
                     binding.bottomSheet.addView(binding.bottomScrollView);

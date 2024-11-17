@@ -2,7 +2,9 @@ package com.funnywolf.hollowkit.view.scroll.behavior
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import androidx.core.view.ViewCompat
 import com.funnywolf.hollowkit.view.isUnder
 
@@ -15,6 +17,9 @@ import com.funnywolf.hollowkit.view.isUnder
 class BottomSheetLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BehavioralScrollView(context, attrs, defStyleAttr) {
+
+    var topScrollTarget: (() -> BehavioralScrollView?)? = null
+
 
     private var firstLayout = true
 
@@ -37,6 +42,11 @@ class BottomSheetLayout @JvmOverloads constructor(
      * 内容视图中间停留的显示高度，默认等于最低高度
      */
     private var midHeight: Int = 0
+
+    var needHandleTouchEvent = false
+    private var isTouchTopLayout = false
+    private var isTopScrollViewCanScroll = false
+    private var handleDrag: Boolean? = true
 
     @JvmOverloads
     fun setup(initPosition: Int = POSITION_MAX, minHeight: Int = 0, midHeight: Int = minHeight) {
@@ -67,7 +77,8 @@ class BottomSheetLayout @JvmOverloads constructor(
 
     override fun handleDispatchTouchEvent(e: MotionEvent): Boolean? {
         if ((e.action == MotionEvent.ACTION_CANCEL || e.action == MotionEvent.ACTION_UP)
-            && lastScrollDir != 0) {
+            && lastScrollDir != 0
+        ) {
             // 在 up 或 cancel 时，根据当前滚动位置和上次滚动的方向，决定动画的目标位置
             smoothScrollTo(
                 if (scrollY > midScroll) {
@@ -83,19 +94,40 @@ class BottomSheetLayout @JvmOverloads constructor(
                         minScroll
                     }
                 }
-            )
+            ) {
+                needHandleTouchEvent = false
+            }
             return true
         }
         return super.handleDispatchTouchEvent(e)
     }
 
+
     override fun handleTouchEvent(e: MotionEvent): Boolean? {
-        // down 事件触点不在 midView 上时不做处理
-        return if (e.action == MotionEvent.ACTION_DOWN && getChildAt(0)?.isUnder(e.rawX, e.rawY) != true) {
-            false
-        } else {
-            null
-        }
+//        if(topScrollTarget?.invoke()?.currProcess() != 1.0f) return false
+        return null
+
+//        isTouchTopLayout =
+//            (e.action == MotionEvent.ACTION_DOWN && getChildAt(0)?.isUnder(e.rawX, e.rawY) != true)
+//
+//        //top scroll view已经滑倒底
+//        if (topScrollTarget?.invoke()?.currProcess() == 1.0f) {//or process==0 && totalShowing=true
+//
+//            if(handleDrag == false) {
+//
+//                return false
+//            }
+//            return null
+//        }
+//
+//        // down 事件触点不在 midView 上时不做处理
+//        return if (needHandleTouchEvent) {
+//            null
+//        } else if (isTouchTopLayout) {
+//            false
+//        } else {
+//            null
+//        }
     }
 
     override fun handleNestedPreScrollFirst(
@@ -125,8 +157,29 @@ class BottomSheetLayout @JvmOverloads constructor(
         return if (type == ViewCompat.TYPE_NON_TOUCH) {
             true
         } else {
-            null
+            handleDrag = handleDrag(scroll)
+            handleDrag
         }
+    }
+
+    private fun handleFling(scroll: Int): Boolean? {
+        isTopScrollViewCanScroll = topScrollTarget?.invoke()?.canScrollSelf(scroll) ?: false
+        Log.d("cyyd", "handleFling isTopScrollViewCanScroll = $isTopScrollViewCanScroll")
+        if (isTouchTopLayout) {
+            if (!isTopScrollViewCanScroll) return null
+            return false
+        }
+        return true
+    }
+
+    private fun handleDrag(scroll: Int): Boolean? {
+        isTopScrollViewCanScroll = topScrollTarget?.invoke()?.canScrollSelf(scroll) ?: false
+        Log.d("cyyd", "handleDrag isTopScrollViewCanScroll = $isTopScrollViewCanScroll")
+        if (isTouchTopLayout) {
+            if (!isTopScrollViewCanScroll) return null
+            return false
+        }
+        return null
     }
 
     companion object {
@@ -134,5 +187,4 @@ class BottomSheetLayout @JvmOverloads constructor(
         const val POSITION_MID = 2
         const val POSITION_MAX = 3
     }
-
 }

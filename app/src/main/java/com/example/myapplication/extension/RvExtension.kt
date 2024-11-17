@@ -24,7 +24,7 @@ fun RecyclerView.buildMockAdapter(): RecyclerView {
 
 fun getMockData(): List<String> {
     val mockList = ArrayList<String>()
-    for (i in 0..19) {
+    for (i in 0..15) {
         mockList.add("测试$i")
     }
     return mockList

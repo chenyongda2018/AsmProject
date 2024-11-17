@@ -2,6 +2,8 @@ package com.funnywolf.hollowkit.view.scroll.behavior
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.ViewCompat
 
@@ -16,7 +18,7 @@ class LinkageScrollLayout @JvmOverloads constructor(
 ) : BehavioralScrollView(context, attrs, defStyleAttr) {
 
     var topScrollTarget: (()-> View?)? = null
-    var bottomScrollTarget: (()-> View?)? = null
+    var bottomScrollTarget: (()-> BehavioralScrollView?)? = null
 
     override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
         // 为了能够将滚动传递下去，需要把 fling 拦截下来
@@ -45,11 +47,18 @@ class LinkageScrollLayout @JvmOverloads constructor(
     }
 
     private fun handleDrag(scroll: Int): Boolean? {
+        if(!canScrollSelf(scroll)) return null
         scrollBy(0, if (scrollY > 0) { scroll } else { scroll / 2 })
         return true
     }
 
+    override fun handleTouchEvent(e: MotionEvent): Boolean? {
+        return super.handleTouchEvent(e)
+    }
+
+
     private fun handleFling(scroll: Int): Boolean? {
+        Log.d("cyyd","top layout handle fling")
         if (isScrollChildTotalShowing() && nestedScrollTarget?.canScrollVertically(scroll) == true) {
             nestedScrollTarget?.scrollBy(0, scroll)
             return true
@@ -61,8 +70,9 @@ class LinkageScrollLayout @JvmOverloads constructor(
         // 自己无法滚动时根据方向确定滚动传递的目标
         val target = if (scroll < 0) {
             topScrollTarget?.invoke()
-        } else {
-            bottomScrollTarget?.invoke()
+        }
+        else {
+            null
         }
         if (target != null && target.canScrollVertically(scroll)) {
             target.scrollBy(0, scroll)

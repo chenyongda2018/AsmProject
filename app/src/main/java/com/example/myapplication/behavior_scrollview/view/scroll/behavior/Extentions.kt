@@ -1,5 +1,6 @@
 package com.funnywolf.hollowkit.view.scroll.behavior
 
+import android.util.Log
 import androidx.core.view.ViewCompat
 
 /**
@@ -54,7 +55,10 @@ fun BehavioralScrollView.inStablePosition(): Boolean {
 fun BehavioralScrollView.isScrollChildTotalShowing(): Boolean {
     val v = nestedScrollChild ?: return true
     return when (nestedScrollAxes) {
-        ViewCompat.SCROLL_AXIS_VERTICAL -> v.y - scrollY >= 0 && v.y + v.height - scrollY <= height
+        ViewCompat.SCROLL_AXIS_VERTICAL -> {
+            val result = (v.y - scrollY >= 0 && v.y + v.height - scrollY <= height)
+            result
+        }
         ViewCompat.SCROLL_AXIS_HORIZONTAL -> v.x - scrollX >= 0 && v.x + v.width - scrollX <= width
         else -> return true
     }

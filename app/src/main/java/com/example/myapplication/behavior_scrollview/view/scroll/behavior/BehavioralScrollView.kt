@@ -97,7 +97,7 @@ open class BehavioralScrollView @JvmOverloads constructor(
     /**
      * 使能日志
      */
-    var enableLog = false
+    var enableLog = true
 
     // region 一些辅助变量
 
@@ -810,7 +810,7 @@ open class BehavioralScrollView @JvmOverloads constructor(
     /**
      * 根据当前方向判断自身是否可以滚动
      */
-    private fun canScrollSelf(dir: Int): Boolean {
+    fun canScrollSelf(dir: Int): Boolean {
         return when (nestedScrollAxes) {
             ViewCompat.SCROLL_AXIS_HORIZONTAL -> canScrollHorizontally(dir)
             ViewCompat.SCROLL_AXIS_VERTICAL -> canScrollVertically(dir)
