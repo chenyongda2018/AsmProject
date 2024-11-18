@@ -58,7 +58,7 @@ class MethodFindRefVisitor(
 
     override fun visitEnd() {
         resultList.forEach {
-            println(it)
+            println("method find target $it")
         }
         super.visitEnd()
     }

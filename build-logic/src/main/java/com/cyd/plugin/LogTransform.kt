@@ -16,7 +16,7 @@ abstract class LogTransform : AsmClassVisitorFactory<InstrumentationParameters.N
         classContext: ClassContext,
         nextClassVisitor: ClassVisitor
     ): ClassVisitor {
-//        return MethodFindRefVisitor(Opcodes.ASM5,nextClassVisitor,"android/util/Log","i","(Ljava/lang/String;Ljava/lang/String;)I")
+//        return MethodFindRefVisitor(Opcodes.ASM5,nextClassVisitor,"android/telephony/TelephonyManage","getDeviceId","()Ljava/lang/String;")
 //        return MethodRemoveVisitor(Opcodes.ASM5,nextClassVisitor)
         return TrackClickClassVisitor(Opcodes.ASM5,true,nextClassVisitor)
     }
