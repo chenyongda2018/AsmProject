@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".crash.CrashActivity">
+
+    <Button
+        android:id="@+id/click_exception"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:text="Click Exception"
+        app:layout_constraintEnd_toStartOf="@id/thread_exception"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/handler_exception"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:text="Handler Exception"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/click_exception" />
+
+    <Button
+        android:id="@+id/thread_exception"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:text="Thread Exception"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/click_exception"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

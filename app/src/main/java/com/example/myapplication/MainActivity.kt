@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.asm.AsmActivity
 import com.example.myapplication.behavior_scrollview.view.BahaviorLayoutActivity
 import com.example.myapplication.bottomsheet.BottomSheetActivity
+import com.example.myapplication.crash.CrashActivity
 import com.example.myapplication.extension.buildLayoutManager
 import com.example.myapplication.service.IntentServiceActivity
 import com.example.myapplication.service.workmanager.WorkManagerActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             MenuItemData("BottomSheet & RV", Intent(this, BahaviorLayoutActivity::class.java)),
             MenuItemData("Step view", Intent(this, StepsViewActivity::class.java)),
             MenuItemData("ASM", Intent(this, AsmActivity::class.java)),
+            MenuItemData("Crash", Intent(this, CrashActivity::class.java)),
         )
 
         val menuAdapter = FeatureMenuAdapter(list)
