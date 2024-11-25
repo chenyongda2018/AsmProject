@@ -9,6 +9,7 @@ import com.example.myapplication.behavior_scrollview.view.BahaviorLayoutActivity
 import com.example.myapplication.bottomsheet.BottomSheetActivity
 import com.example.myapplication.crash.CrashActivity
 import com.example.myapplication.extension.buildLayoutManager
+import com.example.myapplication.perfermance.PerHomeActivity
 import com.example.myapplication.service.IntentServiceActivity
 import com.example.myapplication.service.workmanager.WorkManagerActivity
 import com.example.myapplication.view.StepsViewActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             MenuItemData("Step view", Intent(this, StepsViewActivity::class.java)),
             MenuItemData("ASM", Intent(this, AsmActivity::class.java)),
             MenuItemData("Crash", Intent(this, CrashActivity::class.java)),
+            MenuItemData("Perfermance", Intent(this, PerHomeActivity::class.java)),
         )
 
         val menuAdapter = FeatureMenuAdapter(list)

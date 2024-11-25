@@ -14,7 +14,7 @@ import kotlin.concurrent.thread
 class CrashActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = CrashActivity::class.java.simpleName
+        val TAG = "CrashActivityTAG"
     }
 
     private val binding by lazy {
@@ -34,7 +34,7 @@ class CrashActivity : AppCompatActivity() {
         val uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
             Log.d(TAG,"thread=${t.name},--${e}")
-//            uncaughtExceptionHandler.uncaughtException(t, e)
+            uncaughtExceptionHandler.uncaughtException(t, e)
         }
 
 

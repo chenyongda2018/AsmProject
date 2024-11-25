@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <activity
+            android:name=".perfermance.PerSecActivity"
+            android:exported="false" />
+        <activity
+            android:name=".perfermance.PerHomeActivity"
+            android:exported="false" />
         <activity
             android:name=".crash.CrashActivity"
             android:exported="false" />
