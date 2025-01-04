@@ -9,6 +9,7 @@ import com.example.myapplication.bottomsheet.BottomSheetActivity
 import com.example.myapplication.extension.buildLayoutManager
 import com.example.myapplication.service.IntentServiceActivity
 import com.example.myapplication.service.workmanager.WorkManagerActivity
+import com.example.myapplication.span.SpanActivity
 import com.example.myapplication.view.StepsViewActivity
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             MenuItemData("WorkManager", Intent(this, WorkManagerActivity::class.java)),
             MenuItemData("BottomSheet & RV", Intent(this, BahaviorLayoutActivity::class.java)),
             MenuItemData("Step view", Intent(this, StepsViewActivity::class.java)),
+            MenuItemData("Span view", Intent(this, SpanActivity::class.java)),
         )
 
         val menuAdapter = FeatureMenuAdapter(list)
